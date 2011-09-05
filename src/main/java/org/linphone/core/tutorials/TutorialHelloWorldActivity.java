@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import org.linphone.R;
-import org.linphone.core.LinphoneCoreException;
 
 /**
  * Activity for displaying and starting the HelloWorld example on Android phone.
@@ -37,7 +36,7 @@ public class TutorialHelloWorldActivity extends Activity {
 
 	private static final String defaultSipAddress = "sip:";
 	private TextView sipAddressWidget;
-	private TutorialHelloWorld tutorial;
+//	private TutorialHelloWorld tutorial;
 	private Handler mHandler =  new Handler() ;
 	private Button buttonCall;
 
@@ -50,11 +49,11 @@ public class TutorialHelloWorldActivity extends Activity {
 
 		// Output text to the outputText widget
 		final TextView outputText = (TextView) findViewById(R.id.OutputText);
-		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
+//		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
 
 		
 		// Create HelloWorld object
-		tutorial = new TutorialHelloWorld(notifier);
+//		tutorial = new TutorialHelloWorld(notifier);
 
 		
 		
@@ -72,7 +71,7 @@ public class TutorialHelloWorldActivity extends Activity {
 		Button buttonStop = (Button) findViewById(R.id.ButtonStop);
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				tutorial.stopMainLoop();
+//				tutorial.stopMainLoop();
 			}
 		});
 	}
@@ -81,17 +80,17 @@ public class TutorialHelloWorldActivity extends Activity {
 	private class TutorialLaunchingThread extends Thread {
 		@Override
 		public void run() {
-			super.run();
-			try {
-				tutorial.launchTutorial(sipAddressWidget.getText().toString());
-				mHandler.post(new Runnable() {
-					public void run() {
-						buttonCall.setEnabled(true);
-					}
-				});
-			} catch (LinphoneCoreException e) {
-				e.printStackTrace();
-			}
+//			super.run();
+//			try {
+//				tutorial.launchTutorial(sipAddressWidget.getText().toString());
+//				mHandler.post(new Runnable() {
+//					public void run() {
+//						buttonCall.setEnabled(true);
+//					}
+//				});
+//			} catch (LinphoneCoreException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 }

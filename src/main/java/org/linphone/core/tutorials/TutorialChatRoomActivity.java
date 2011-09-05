@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import org.linphone.R;
-import org.linphone.core.LinphoneCoreException;
 
 /**
  * Activity for displaying and starting the chatroom example on Android phone.
@@ -37,7 +36,7 @@ public class TutorialChatRoomActivity extends Activity {
 
 	private static final String defaultSipAddress = "sip:";
 	private TextView sipAddressWidget;
-	private TutorialChatRoom tutorial;
+//	private TutorialChatRoom tutorial;
 	private Handler mHandler =  new Handler() ;
 	private Button buttonCall;
 
@@ -50,11 +49,11 @@ public class TutorialChatRoomActivity extends Activity {
 
 		// Output text to the outputText widget
 		final TextView outputText = (TextView) findViewById(R.id.OutputText);
-		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
-
+//		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
+//
 		
 		// Create HelloWorld object
-		tutorial = new TutorialChatRoom(notifier);
+//		tutorial = new TutorialChatRoom(notifier);
 
 		
 		
@@ -72,7 +71,7 @@ public class TutorialChatRoomActivity extends Activity {
 		Button buttonStop = (Button) findViewById(R.id.ButtonStop);
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				tutorial.stopMainLoop();
+//				tutorial.stopMainLoop();
 			}
 		});
 	}
@@ -82,16 +81,16 @@ public class TutorialChatRoomActivity extends Activity {
 		@Override
 		public void run() {
 			super.run();
-			try {
-				tutorial.launchTutorial(sipAddressWidget.getText().toString());
-				mHandler.post(new Runnable() {
-					public void run() {
-						buttonCall.setEnabled(true);
-					}
-				});
-			} catch (LinphoneCoreException e) {
-				e.printStackTrace();
-			}
+//			try {
+////				tutorial.launchTutorial(sipAddressWidget.getText().toString());
+//				mHandler.post(new Runnable() {
+//					public void run() {
+//						buttonCall.setEnabled(true);
+//					}
+//				});
+//			} catch (LinphoneCoreException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 }

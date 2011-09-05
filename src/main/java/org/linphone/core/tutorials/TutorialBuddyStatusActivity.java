@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import org.linphone.R;
-import org.linphone.core.LinphoneCoreException;
 
 /**
  * Activity for displaying and starting the BuddyStatus example on Android phone.
@@ -40,7 +39,7 @@ public class TutorialBuddyStatusActivity extends Activity {
 	private TextView mySipAddressWidget;
 	private TextView mySipPasswordWidget;
 	
-	private TutorialBuddyStatus tutorial;
+//	private TutorialBuddyStatus tutorial;
 	private Handler mHandler =  new Handler() ;
 	private Button buttonCall;
 
@@ -59,11 +58,11 @@ public class TutorialBuddyStatusActivity extends Activity {
 		
 		// Output text to the outputText widget
 		final TextView outputText = (TextView) findViewById(R.id.OutputText);
-		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
+//		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
 
 		
 		// Create BuddyStatus object
-		tutorial = new TutorialBuddyStatus(notifier);
+//		tutorial = new TutorialBuddyStatus(notifier);
 
 		
 		
@@ -81,7 +80,7 @@ public class TutorialBuddyStatusActivity extends Activity {
 		Button buttonStop = (Button) findViewById(R.id.ButtonStop);
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				tutorial.stopMainLoop();
+//				tutorial.stopMainLoop();
 			}
 		});
 	}
@@ -90,19 +89,19 @@ public class TutorialBuddyStatusActivity extends Activity {
 	private class TutorialLaunchingThread extends Thread {
 		@Override
 		public void run() {
-			super.run();
-			try {
-				String myIdentity = mySipAddressWidget.getText().length()>0?mySipAddressWidget.getText().toString():null;
-				String myPassword = mySipPasswordWidget.getText().length()>0?mySipPasswordWidget.getText().toString():null;
-				tutorial.launchTutorial(sipAddressWidget.getText().toString(), myIdentity, myPassword);
-				mHandler.post(new Runnable() {
-					public void run() {
-						buttonCall.setEnabled(true);
-					}
-				});
-			} catch (LinphoneCoreException e) {
-				e.printStackTrace();
-			}
+//			super.run();
+//			try {
+//				String myIdentity = mySipAddressWidget.getText().length()>0?mySipAddressWidget.getText().toString():null;
+//				String myPassword = mySipPasswordWidget.getText().length()>0?mySipPasswordWidget.getText().toString():null;
+////				tutorial.launchTutorial(sipAddressWidget.getText().toString(), myIdentity, myPassword);
+//				mHandler.post(new Runnable() {
+//					public void run() {
+//						buttonCall.setEnabled(true);
+//					}
+//				});
+//			} catch (LinphoneCoreException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 }

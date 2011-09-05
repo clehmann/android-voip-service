@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import org.linphone.R;
-import org.linphone.core.LinphoneCoreException;
 
 /**
  * Activity for displaying and starting the registration example on Android phone.
@@ -38,7 +37,7 @@ public class TutorialRegistrationActivity extends TutorialHelloWorldActivity {
 	private static final String defaultSipPassword = "";
 	private TextView sipAddressWidget;
 	private TextView sipPasswordWidget;
-	private TutorialRegistration tutorial;
+//	private TutorialRegistration tutorial;
 	private Button buttonCall;
 	private Handler mHandler =  new Handler();
 	private TextView outputText;
@@ -56,11 +55,11 @@ public class TutorialRegistrationActivity extends TutorialHelloWorldActivity {
 
 		// Output text to the outputText widget
 		outputText = (TextView) findViewById(R.id.OutputText);
-		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
+//		final TutorialNotifier notifier = new AndroidTutorialNotifier(mHandler, outputText);
 
 		
 		// Create Tutorial object
-		tutorial = new TutorialRegistration(notifier);
+//		tutorial = new TutorialRegistration(notifier);
 
 		
 		
@@ -79,7 +78,7 @@ public class TutorialRegistrationActivity extends TutorialHelloWorldActivity {
 		Button buttonStop = (Button) findViewById(R.id.ButtonStop);
 		buttonStop.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				tutorial.stopMainLoop();
+//				tutorial.stopMainLoop();
 			}
 		});
 	}
@@ -88,15 +87,15 @@ public class TutorialRegistrationActivity extends TutorialHelloWorldActivity {
 	private class TutorialLaunchingThread extends Thread {
 		@Override
 		public void run() {
-			super.run();
-			try {
-				tutorial.launchTutorial(
-						sipAddressWidget.getText().toString(),
-						sipPasswordWidget.getText().toString());
-			} catch (LinphoneCoreException e) {
-				e.printStackTrace();
-				outputText.setText(e.getMessage() +"\n"+outputText.getText());
-			}
+//			super.run();
+//			try {
+////				tutorial.launchTutorial(
+////						sipAddressWidget.getText().toString(),
+////						sipPasswordWidget.getText().toString());
+//			} catch (LinphoneCoreException e) {
+//				e.printStackTrace();
+//				outputText.setText(e.getMessage() +"\n"+outputText.getText());
+//			}
 		}
 	}
 }

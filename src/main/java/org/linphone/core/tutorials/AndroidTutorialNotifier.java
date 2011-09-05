@@ -28,7 +28,7 @@ import android.widget.TextView;
  * @author Guillaume Beraudo
  *
  */
-class AndroidTutorialNotifier extends TutorialNotifier {
+class AndroidTutorialNotifier{
 
 	private Handler mHandler;
 	private TextView outputTextView;
@@ -39,7 +39,6 @@ class AndroidTutorialNotifier extends TutorialNotifier {
 	}
 	
 	
-	@Override
 	public void notify(final String s) {
 		mHandler.post(new Runnable() {
 			public void run() {
