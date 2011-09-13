@@ -26,6 +26,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import net.chrislehmann.linphone.R;
 import org.linphone.ui.HangCallButton;
 
 import java.util.Timer;

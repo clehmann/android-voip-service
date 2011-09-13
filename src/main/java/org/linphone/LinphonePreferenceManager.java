@@ -21,6 +21,7 @@ package org.linphone;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import net.chrislehmann.linphone.R;
 
 public class LinphonePreferenceManager {
 

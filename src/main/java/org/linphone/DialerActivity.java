@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.chrislehmann.linphone.R;
 import org.linphone.LinphoneManager.NewOutgoingCallUiListener;
 import org.linphone.LinphoneService.LinphoneGuiListener;
 import org.linphone.core.CallDirection;

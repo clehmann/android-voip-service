@@ -24,7 +24,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import org.linphone.R;
+import net.chrislehmann.linphone.R;
 
 /**
  * Activity for displaying and starting the BuddyStatus example on Android phone.

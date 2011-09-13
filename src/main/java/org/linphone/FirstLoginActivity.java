@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.chrislehmann.linphone.R;
 import org.linphone.core.LinphoneCore.RegistrationState;
 import org.linphone.core.Log;
 

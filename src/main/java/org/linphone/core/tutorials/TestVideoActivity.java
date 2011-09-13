@@ -28,7 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
-import org.linphone.R;
+import net.chrislehmann.linphone.R;
 import org.linphone.core.Log;
 import org.linphone.core.VideoSize;
 import org.linphone.core.video.AndroidCameraRecord;

@@ -29,6 +29,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
+import net.chrislehmann.linphone.R;
 import org.linphone.LinphoneManager.EcCalibrationListener;
 import org.linphone.core.Hacks;
 import org.linphone.core.LinphoneCore.EcCalibratorStatus;
@@ -40,13 +41,13 @@ import org.linphone.core.video.AndroidCameraRecordManager;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.linphone.R.string.ec_calibrating;
-import static org.linphone.R.string.ec_calibration_launch_message;
-import static org.linphone.R.string.pref_codec_amr_key;
-import static org.linphone.R.string.pref_codec_ilbc_key;
-import static org.linphone.R.string.pref_codec_speex16_key;
-import static org.linphone.R.string.pref_echo_canceller_calibration_key;
-import static org.linphone.R.string.pref_video_enable_key;
+import static net.chrislehmann.linphone.R.string.ec_calibrating;
+import static net.chrislehmann.linphone.R.string.ec_calibration_launch_message;
+import static net.chrislehmann.linphone.R.string.pref_codec_amr_key;
+import static net.chrislehmann.linphone.R.string.pref_codec_ilbc_key;
+import static net.chrislehmann.linphone.R.string.pref_codec_speex16_key;
+import static net.chrislehmann.linphone.R.string.pref_echo_canceller_calibration_key;
+import static net.chrislehmann.linphone.R.string.pref_video_enable_key;
 
 public class LinphonePreferencesActivity extends PreferenceActivity implements EcCalibrationListener {
 	private Handler mHandler = new Handler();

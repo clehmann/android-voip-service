@@ -25,7 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import org.linphone.LinphoneManager;
-import org.linphone.R;
+import net.chrislehmann.linphone.R;
 import org.linphone.core.LinphoneCoreException;
 
 /**

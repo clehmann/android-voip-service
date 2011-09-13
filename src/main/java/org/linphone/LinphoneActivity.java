@@ -46,6 +46,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.chrislehmann.linphone.R;
 import org.linphone.LinphoneManager.EcCalibrationListener;
 import org.linphone.core.LinphoneCore;
 import org.linphone.core.LinphoneCore.EcCalibratorStatus;

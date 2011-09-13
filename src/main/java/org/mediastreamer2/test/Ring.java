@@ -21,7 +21,7 @@ package org.mediastreamer2.test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import org.linphone.R;
+import net.chrislehmann.linphone.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

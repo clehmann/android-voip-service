@@ -36,6 +36,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.chrislehmann.linphone.R;
 
 import java.util.Collections;
 import java.util.List;

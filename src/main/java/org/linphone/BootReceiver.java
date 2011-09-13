@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import net.chrislehmann.linphone.R;
 
 public class BootReceiver extends BroadcastReceiver {
 

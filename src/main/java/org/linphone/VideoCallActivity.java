@@ -30,6 +30,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.ViewGroup.LayoutParams;
+import net.chrislehmann.linphone.R;
 import org.linphone.core.LinphoneCore;
 import org.linphone.core.Log;
 import org.linphone.core.Version;
@@ -137,7 +138,6 @@ public class VideoCallActivity extends SoftVolumeActivity implements OnCapturing
 	/**
 	 * Base capture frame on streamed dimensions and orientation.
 	 * @param sv capture surface view to resize the layout
-	 * @param vs video size from which to calculate the dimensions
 	 */
 	private void resizeCapturePreview(SurfaceView sv) {
 		LayoutParams lp = sv.getLayoutParams();

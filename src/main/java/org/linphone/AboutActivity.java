@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.widget.TextView;
+import net.chrislehmann.linphone.R;
 import org.linphone.core.Log;
 
 

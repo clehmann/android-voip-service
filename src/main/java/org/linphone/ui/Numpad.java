@@ -24,7 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import org.linphone.R;
+import net.chrislehmann.linphone.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
