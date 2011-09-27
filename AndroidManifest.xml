@@ -7,7 +7,7 @@
 
 
     <!-- Don't remove the space after android:debuggable: it prevents ndk-build to try including gdbserver and crash gcc -->
-    <application android:label="@string/app_name" android:debuggable ="true" android:icon="@drawable/logo_linphone_57x57">
+    <application android:debuggable ="true">
          
         <!--<activity android:name="org.linphone.LinphoneActivity"-->
                   <!--android:label="@string/app_name"-->
