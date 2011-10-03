@@ -22,6 +22,7 @@ import roboguice.util.Ln;
 
 public class SipService extends RoboService implements LinphoneManager.LinphoneServiceListener {
 
+
     private final static String LOGTAG = LinphoneService.class.getSimpleName();
     private LinphoneManager linphoneManager;
 
@@ -36,8 +37,11 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
             stopLinphoneManager();
             stopSelf();
         } else if (SipServiceContants.Actions.HANG_UP.equals(action)) {
-            startLinphoneManage();
-            linphoneManager.terminateCall();
+            getLinphoneManager().terminateCall();
+        } else if (SipServiceContants.Actions.ENABLE_SPEAKERPHONE.equals(action)) {
+            getLinphoneManager().routeAudioToSpeaker();
+        } else if (SipServiceContants.Actions.DISABLE_SPEAKERPHONE.equals(action)) {
+            getLinphoneManager().routeAudioToReceiver();
         } else if (SipServiceContants.Actions.SET_SERVER_INFO.equals(action)) {
             Ln.d("Setting server info");
             PreferencesUtilities.savePreference(getBaseContext(), R.string.pref_username_key, intent.getStringExtra(SipServiceContants.Extras.USERNAME_KEY));
@@ -45,13 +49,19 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
             PreferencesUtilities.savePreference(getBaseContext(), R.string.pref_domain_key, intent.getStringExtra(SipServiceContants.Extras.DOMAIN));
 
             stopLinphoneManager();
-            startLinphoneManage();
+            startLinphoneManager();
         }
+
 
         return START_STICKY;
     }
 
-    private void startLinphoneManage() {
+    private LinphoneManager getLinphoneManager() {
+        startLinphoneManager();
+        return linphoneManager;
+    }
+
+    private void startLinphoneManager() {
         if (linphoneManager == null) {
             Ln.d("Startiing linphone service...");
             linphoneManager = LinphoneManager.createAndStart(getBaseContext(), this);
@@ -121,16 +131,24 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     }
 
     public void onRegistrationStateChanged(LinphoneCore.RegistrationState state, String message) {
-        Log.d(LOGTAG, "Registration state changed: " + state + " : " + message);
-//        LinphoneManager.getInstance()
+        if (state.equals(LinphoneCore.RegistrationState.RegistrationFailed)) {
 
-        //To change body of implemented methods use File | Settings | File Templates.
+        } else if (state.equals(LinphoneCore.RegistrationState.RegistrationOk)) {
+
+        }
+        Log.d(LOGTAG, "Registration state changed: " + state + " : " + message);
     }
 
     public void onCallStateChanged(LinphoneCall call, LinphoneCall.State state, String message) {
 
         try {
-            LinphoneManager.getInstance().acceptCallIfIncomingPending();
+            if (state.equals(LinphoneCall.State.IncomingReceived)) {
+                LinphoneManager.getInstance().acceptCallIfIncomingPending();
+                LinphoneManager.getInstance().routeAudioToSpeaker();
+            } else if (state.equals(LinphoneCall.State.CallEnd)) {
+                LinphoneManager.getInstance().routeAudioToReceiver();
+                //notify
+            }
         } catch (LinphoneCoreException e) {
             throw new RuntimeException(e);
         }
