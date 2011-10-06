@@ -74,7 +74,7 @@ public class LinphonePreferencesActivity extends PreferenceActivity implements E
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Load the preferences from an XML resource
-		addPreferencesFromResource(R.xml.preferences);
+		addPreferencesFromResource(R.xml.linphone_preferences);
 
 		addTransportChecboxesListener();
 		

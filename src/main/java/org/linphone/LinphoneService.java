@@ -107,7 +107,7 @@ public final class LinphoneService extends Service implements LinphoneServiceLis
 		LinphonePreferenceManager.getInstance(this);
 
 		// Set default preferences
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+		PreferenceManager.setDefaultValues(this, R.xml.linphone_preferences, true);
 
 		
 		notificationTitle = getString(R.string.app_name);
