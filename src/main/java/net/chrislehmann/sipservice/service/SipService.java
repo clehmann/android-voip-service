@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 import net.chrislehmann.common.util.PreferencesUtilities;
 import net.chrislehmann.linphone.R;
 import net.chrislehmann.sipservice.SipServiceContants;
@@ -26,13 +25,12 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     private final static String LOGTAG = SipService.class.getSimpleName();
     private LinphoneManager linphoneManager;
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Ln.d("Got start command");
 
+        String action = intent != null ? intent.getAction() : null ;
 
-        String action = intent.getAction();
         if (SipServiceContants.Actions.STOP_SERVICE.equals(action)) {
             stopLinphoneManager();
             stopSelf();
@@ -67,7 +65,6 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
             PreferencesUtilities.savePreference(this, R.string.pref_video_initiate_call_with_video_key, true);
             PreferencesUtilities.savePreference(this, R.string.pref_video_automatically_share_my_video_key, true);
 //            PreferencesUtilities.savePreference(this, R.string.pref_first, false);
-
 
 
             stopLinphoneManager();
@@ -140,7 +137,6 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
         Hacks.dumpDeviceInformation();
         dumpInstalledLinphoneInformation();
 
-        Toast.makeText(this, "Started Service....", Toast.LENGTH_SHORT).show();
         super.onCreate();
     }
 
@@ -169,9 +165,7 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     }
 
     public void onRegistrationStateChanged(LinphoneCore.RegistrationState state, String message) {
-        if (state.equals(LinphoneCore.RegistrationState.RegistrationFailed)) {
-
-        } else if (state.equals(LinphoneCore.RegistrationState.RegistrationOk)) {
+        if (state.equals(LinphoneCore.RegistrationState.RegistrationOk)) {
             sendBroadcast(new Intent(SipServiceContants.Actions.REGISTRATION_SUCCESS));
         } else if (state.equals(LinphoneCore.RegistrationState.RegistrationFailed)) {
             Intent i = new Intent(SipServiceContants.Actions.ERROR_REGISTERING);
@@ -188,8 +182,12 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
         try {
             if (state.equals(LinphoneCall.State.IncomingReceived)) {
                 LinphoneManager.getInstance().acceptCallIfIncomingPending();
-            } else if (state.equals(LinphoneCall.State.CallEnd)) {
+            } else if (state.equals(LinphoneCall.State.CallEnd) || state.equals(LinphoneCall.State.CallReleased)) {
                 sendBroadcast(new Intent(SipServiceContants.Actions.CALL_ENDED));
+            } else if (state.equals(LinphoneCall.State.Error)) {
+                Intent i = new Intent(SipServiceContants.Actions.ERROR_REGISTERING);
+                i.putExtra(SipServiceContants.Extras.ERROR_MESSAGE, message);
+                sendBroadcast(i);
             }
         } catch (LinphoneCoreException e) {
             throw new RuntimeException(e);
