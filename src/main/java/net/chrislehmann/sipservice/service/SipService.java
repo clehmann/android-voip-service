@@ -51,6 +51,10 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
                         getLinphoneManager().routeAudioToSpeaker();
                     } else if (SipServiceContants.Actions.DISABLE_SPEAKERPHONE.equals(action)) {
                         getLinphoneManager().routeAudioToReceiver();
+                    } else if( SipServiceContants.Actions.MUTE_MIC.equals(action)){
+                        getLinphoneCore().muteMic(true);
+                    } else if( SipServiceContants.Actions.UNMUTE_MIC.equals(action)){
+                        getLinphoneCore().muteMic(false);
                     } else if (SipServiceContants.Actions.SET_SERVER_INFO.equals(action)) {
                         Ln.d("Setting server info");
                         PreferencesUtilities.savePreference(SipService.this, R.string.pref_username_key, intent.getStringExtra(SipServiceContants.Extras.USERNAME_KEY));
@@ -108,6 +112,10 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     private LinphoneManager getLinphoneManager() {
         startLinphoneManager();
         return linphoneManager;
+    }
+    private LinphoneCore getLinphoneCore() {
+        startLinphoneManager();
+        return LinphoneManager.getLc();
     }
 
     private void startLinphoneManager() {

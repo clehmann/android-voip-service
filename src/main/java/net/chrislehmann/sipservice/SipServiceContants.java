@@ -11,6 +11,8 @@ public class SipServiceContants {
         public static final String ERROR_REGISTERING = "net.chrislehmann.sipservice.ACTION_ERROR_REGISTERING";
         public static final String REGISTRATION_SUCCESS = "net.chrislehmann.sipservice.REGISTRATION_SUCCESS";
         public static final String CALL_ANSWERED = "net.chrislehmann.sipservice.ACTION_CALL_ENDED";
+        public static final String MUTE_MIC = "net.chrislehmann.sipservice.MUTE_MIC";
+        public static final String UNMUTE_MIC = "net.chrislehmann.sipservice.UNMUTE_MIC";
     }
 
     public class Extras {
