@@ -28,7 +28,6 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     private final static String LOGTAG = SipService.class.getSimpleName();
     private LinphoneManager linphoneManager;
 
-
     class LooperThread extends Thread {
         public Handler mHandler;
 
@@ -39,50 +38,7 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
                 public void handleMessage(Message msg) {
 
                     Intent intent = (Intent) msg.obj;
-
-                    String action = intent != null ? intent.getAction() : null;
-
-                    if (SipServiceContants.Actions.STOP_SERVICE.equals(action)) {
-                        stopLinphoneManager();
-                        stopSelf();
-                    } else if (SipServiceContants.Actions.HANG_UP.equals(action)) {
-                        getLinphoneManager().terminateCall();
-                    } else if (SipServiceContants.Actions.ENABLE_SPEAKERPHONE.equals(action)) {
-                        getLinphoneManager().routeAudioToSpeaker();
-                    } else if (SipServiceContants.Actions.DISABLE_SPEAKERPHONE.equals(action)) {
-                        getLinphoneManager().routeAudioToReceiver();
-                    } else if( SipServiceContants.Actions.MUTE_MIC.equals(action)){
-                        getLinphoneCore().muteMic(true);
-                    } else if( SipServiceContants.Actions.UNMUTE_MIC.equals(action)){
-                        getLinphoneCore().muteMic(false);
-                    } else if (SipServiceContants.Actions.SET_SERVER_INFO.equals(action)) {
-                        Ln.d("Setting server info");
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_username_key, intent.getStringExtra(SipServiceContants.Extras.USERNAME_KEY));
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_passwd_key, intent.getStringExtra(SipServiceContants.Extras.PASSWORD));
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_domain_key, intent.getStringExtra(SipServiceContants.Extras.DOMAIN));
-
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_pcma_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_cancellation_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_canceller_calibration_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_enable_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_transport_udp_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_audio_use_specific_mode_key, "0");
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_codec_mpeg4_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_amr_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_pcmu_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex32_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_gsm_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex16_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex8_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_codec_vp8_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_ilbc_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_initiate_call_with_video_key, true);
-                        PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_automatically_share_my_video_key, true);
-
-
-                        stopLinphoneManager();
-                        startLinphoneManager();
-                    }
+                    handleIntent(intent);
                 }
             };
 
@@ -104,7 +60,6 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
         Message message = new Message();
         message.obj = intent;
         messageLoop.mHandler.sendMessage(message);
-
 
         return START_STICKY;
     }
@@ -228,6 +183,8 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
         try {
             if (state.equals(LinphoneCall.State.IncomingReceived)) {
                 LinphoneManager.getInstance().acceptCallIfIncomingPending();
+            } else if (state.equals(LinphoneCall.State.Connected)) {
+                sendBroadcast(new Intent(SipServiceContants.Actions.CALL_ANSWERED));
             } else if (state.equals(LinphoneCall.State.CallEnd) || state.equals(LinphoneCall.State.CallReleased)) {
                 sendBroadcast(new Intent(SipServiceContants.Actions.CALL_ENDED));
             } else if (state.equals(LinphoneCall.State.Error)) {
@@ -255,5 +212,53 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
 
     public void onCallEncryptionChanged(LinphoneCall call, boolean encrypted, String authenticationToken) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    private void handleIntent(Intent intent) {
+        String action = intent != null ? intent.getAction() : null;
+        Ln.d("Processing action: " + action);
+
+        if (SipServiceContants.Actions.STOP_SERVICE.equals(action)) {
+            stopLinphoneManager();
+            stopSelf();
+        } else if (SipServiceContants.Actions.HANG_UP.equals(action)) {
+            getLinphoneManager().terminateCall();
+        } else if (SipServiceContants.Actions.ENABLE_SPEAKERPHONE.equals(action)) {
+            getLinphoneManager().routeAudioToSpeaker();
+        } else if (SipServiceContants.Actions.DISABLE_SPEAKERPHONE.equals(action)) {
+            getLinphoneManager().routeAudioToReceiver();
+        } else if (SipServiceContants.Actions.MUTE_MIC.equals(action)) {
+            getLinphoneCore().muteMic(true);
+        } else if (SipServiceContants.Actions.UNMUTE_MIC.equals(action)) {
+            getLinphoneCore().muteMic(false);
+        } else if (SipServiceContants.Actions.SET_SERVER_INFO.equals(action)) {
+            Ln.d("Setting server info");
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_username_key, intent.getStringExtra(SipServiceContants.Extras.USERNAME_KEY));
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_passwd_key, intent.getStringExtra(SipServiceContants.Extras.PASSWORD));
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_domain_key, intent.getStringExtra(SipServiceContants.Extras.DOMAIN));
+
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_pcma_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_cancellation_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_canceller_calibration_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_enable_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_transport_udp_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_audio_use_specific_mode_key, "0");
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_codec_mpeg4_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_amr_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_pcmu_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex32_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_gsm_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex16_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_speex8_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_codec_vp8_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_ilbc_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_initiate_call_with_video_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_automatically_share_my_video_key, true);
+
+
+            stopLinphoneManager();
+            startLinphoneManager();
+        }
     }
 }
