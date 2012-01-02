@@ -31,31 +31,31 @@ public interface LinphoneCoreListener {
 
 	/**< Ask the application some authentication information 
 	 * @return */
-	void authInfoRequested(LinphoneCore lc, String realm, String username);
+	void authInfoRequested(LinphoneCore lc,String realm,String username); 
 
 	/**< Callback that notifies various events with human readable text.
 	 * @return */
-	void displayStatus(LinphoneCore lc, String message);
+	void displayStatus(LinphoneCore lc,String message);
 
 	/**< Callback to display a message to the user 
 	 * @return */
-	void displayMessage(LinphoneCore lc, String message);
+	void displayMessage(LinphoneCore lc,String message);
 
 	/** Callback to display a warning to the user 
 	 * @return */
-	void displayWarning(LinphoneCore lc, String message);
+	void displayWarning(LinphoneCore lc,String message);
 
 	/** General State notification  
 	 * @param state LinphoneCore.State
 	 * @return 
 	 * */		
-	void globalState(LinphoneCore lc, LinphoneCore.GlobalState state, String message);
+	void globalState(LinphoneCore lc,LinphoneCore.GlobalState state, String message);
 
 	/** Call  State notification  
 	 * @param state LinphoneCall.State
 	 * @return 
 	 * */		
-	void callState(LinphoneCore lc, LinphoneCall call, LinphoneCall.State cstate, String message);
+	void callState(LinphoneCore lc, LinphoneCall call, LinphoneCall.State cstate,String message);
 
 	/**
 	 * Callback to display change in encryption state.
@@ -93,7 +93,7 @@ public interface LinphoneCoreListener {
 	 * @param from  	LinphoneAddress from
 	 * @param message 	incoming message
 	 */
-	void textReceived(LinphoneCore lc, LinphoneChatRoom cr, LinphoneAddress from, String message);
+	void textReceived(LinphoneCore lc, LinphoneChatRoom cr,LinphoneAddress from,String message);
 
 	/**
 	 * Invoked when echo cancalation calibration is completed
@@ -102,6 +102,6 @@ public interface LinphoneCoreListener {
 	 * @param delay_ms echo delay
 	 * @param data
 	 */
-	void ecCalibrationStatus(LinphoneCore lc, LinphoneCore.EcCalibratorStatus status, int delay_ms, Object data);
+	void ecCalibrationStatus(LinphoneCore lc,LinphoneCore.EcCalibratorStatus status, int delay_ms, Object data);
 }
 

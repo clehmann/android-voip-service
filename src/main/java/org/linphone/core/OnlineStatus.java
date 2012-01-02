@@ -62,7 +62,7 @@ public class OnlineStatus {
 	 */
 	static public OnlineStatus DoNotDisturb = new OnlineStatus(7,"DoNotDisturb");		
 	/**
-	 * Moved in this sate, call can be redirected if an alternate contact address has been set using function {@link org.linphone.core.LinphoneCore#setPresenceInfo(int, String, org.linphone.core.OnlineStatus)}
+	 * Moved in this sate, call can be redirected if an alternate contact address has been set using function {@link LinphoneCore#setPresenceInfo(int, String, OnlineStatus)}
 	 */
 	static public OnlineStatus StatusMoved = new OnlineStatus(8,"StatusMoved");		
 	/**

@@ -21,7 +21,7 @@ package org.linphone.core;
 import java.util.Vector;
 
 /**
- * Object representing a Call. calls are created using {@link LinphoneCore#invite(org.linphone.core.LinphoneAddress)} or passed to the application by listener {@link LinphoneCoreListener#callState(LinphoneCore, org.linphone.core.LinphoneCall, org.linphone.core.LinphoneCall.State, String)}
+ * Object representing a Call. calls are created using {@link LinphoneCore#invite(LinphoneAddress)} or passed to the application by listener {@link LinphoneCoreListener#callState(LinphoneCore, LinphoneCall, State, String)}
  * 
  */
 

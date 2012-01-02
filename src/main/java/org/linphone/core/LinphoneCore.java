@@ -268,7 +268,7 @@ public interface LinphoneCore {
 	public LinphoneAddress interpretUrl(String destination) throws LinphoneCoreException;
 	
 	/**
-	 * Starts a call given a destination. Internally calls {@link #interpretUrl(String)} then {@link #invite(org.linphone.core.LinphoneAddress)}.
+	 * Starts a call given a destination. Internally calls {@link #interpretUrl(String)} then {@link #invite(LinphoneAddress)}.
 	 * @param uri
 	 */
 	public LinphoneCall invite(String destination)throws LinphoneCoreException;
@@ -322,7 +322,7 @@ public interface LinphoneCore {
 	 * Accept an incoming call.
 	 *
 	 * Basically the application is notified of incoming calls within the
-	 * {@link LinphoneCoreListener#inviteReceived(org.linphone.core.LinphoneCore, String)} listener.
+	 * {@link LinphoneCoreListener#inviteReceived(LinphoneCore, String)} listener.
 	 * The application can later respond positively to the call using
 	 * this method.
 	 * @throws LinphoneCoreException 
@@ -397,7 +397,7 @@ public interface LinphoneCore {
 	 * @param number
 	 * @param duration in ms , -1 for unlimited
 	 */
-	void playDtmf(char number, int duration);
+	void playDtmf(char number,int duration);
 	/**
 	 * stop current dtmf
 	 */
@@ -412,7 +412,7 @@ public interface LinphoneCore {
 	 * 
 	 * return null if not found
 	 */
-	PayloadType findPayloadType(String mime, int clockRate);
+	PayloadType findPayloadType(String mime,int clockRate); 
 	/**
 	 * not implemented yet
 	 * @param pt
@@ -460,12 +460,12 @@ public interface LinphoneCore {
 	 * @param minute_away how long in away
 	 * @param status sip uri used to redirect call in state LinphoneStatusMoved
 	 */
-	void setPresenceInfo(int minute_away, String alternative_contact, OnlineStatus status);
+	void setPresenceInfo(int minute_away,String alternative_contact, OnlineStatus status);
 	/**
 	 * Create a new chat room for messaging from a sip uri like sip:joe@sip.linphone.org
 	 * @param to 	destination address for messages 
 	 *
-	 * @return {@link org.linphone.core.LinphoneChatRoom} where messaging can take place.
+	 * @return {@link LinphoneChatRoom} where messaging can take place.
 	 */
 	LinphoneChatRoom createChatRoom(String to);
 	
@@ -577,7 +577,7 @@ public interface LinphoneCore {
 	boolean isKeepAliveEnabled();
 	/**
 	 * Start an echo calibration of the sound devices, in order to find adequate settings for the echo canceler automatically.
-	 * status is notified to {@link LinphoneCoreListener#ecCalibrationStatus(org.linphone.core.LinphoneCore.EcCalibratorStatus, int, Object)}
+	 * status is notified to {@link LinphoneCoreListener#ecCalibrationStatus(EcCalibratorStatus, int, Object)}
 	 * @param User object
 	 * @throws LinphoneCoreException if operation is still in progress;
 	**/

@@ -83,7 +83,7 @@ public interface LinphoneCallLog {
 	 * Destination of the call as a LinphoneAddress object.
 	 * @return
 	 */
-	public LinphoneAddress getTo();
+	public LinphoneAddress getTo ();
 	/**
 	 * The direction of the call
 	 * @return CallDirection

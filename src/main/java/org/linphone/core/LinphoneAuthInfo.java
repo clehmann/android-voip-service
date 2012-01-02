@@ -23,12 +23,12 @@ package org.linphone.core;
  *<br>This object is instanciated using {@link LinphoneCoreFactory#createAuthInfo(String, String, String)}.
  *<br>
  *Once created and filled, a LinphoneAuthInfo must be added to the LinphoneCore in order to become known and used automatically when needed. 
- *Use {@link LinphoneCore#addAuthInfo(org.linphone.core.LinphoneAuthInfo)} for that purpose.
+ *Use {@link LinphoneCore#addAuthInfo(LinphoneAuthInfo)} for that purpose.
  *<br>
  *The LinphoneCore object can take the initiative to request authentication information when needed to the application 
  *through the {@link LinphoneCoreListener#authInfoRequested(LinphoneCore, String, String)} listener.
  *<br>
- *The application can respond to this information request later using  {@link LinphoneCore#addAuthInfo(org.linphone.core.LinphoneAuthInfo)}.
+ *The application can respond to this information request later using  {@link LinphoneCore#addAuthInfo(LinphoneAuthInfo)}. 
  *This will unblock all pending authentication transactions and retry them with authentication headers.
  *
  */

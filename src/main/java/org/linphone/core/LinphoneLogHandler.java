@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 package org.linphone.core;
 /**
  * Interface to implement for handling liblinphone log.
- * <br> use {@link org.linphone.core.LinphoneCoreFactory#setLogHandler(org.linphone.core.LinphoneLogHandler)}
+ * <br> use {@link LinphoneCoreFactory#setLogHandler(LinphoneLogHandler)}
  *
  */
 public interface LinphoneLogHandler {

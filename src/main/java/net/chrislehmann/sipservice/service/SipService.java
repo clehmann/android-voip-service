@@ -28,6 +28,20 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     private final static String LOGTAG = SipService.class.getSimpleName();
     private LinphoneManager linphoneManager;
 
+    /**
+     * A signal handler in native code has been triggered. As our last gasp,
+     * launch the crash handler (in its own process), because when we return
+     * from this function the process will soon exit.
+     */
+    void nativeCrashed() {
+        try {
+            System.err.println("saved game was:\n" + prefs.getString("savedGame", ""));
+        } catch (Exception e) {
+        }
+        new RuntimeException("crashed here (native trace should follow after the Java trace)").printStackTrace();
+        startActivity(new Intent(this, CrashHandler.class));
+    }
+
     class LooperThread extends Thread {
         public Handler mHandler;
 
@@ -68,6 +82,7 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
         startLinphoneManager();
         return linphoneManager;
     }
+
     private LinphoneCore getLinphoneCore() {
         startLinphoneManager();
         return LinphoneManager.getLc();
@@ -237,12 +252,11 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_username_key, intent.getStringExtra(SipServiceContants.Extras.USERNAME_KEY));
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_passwd_key, intent.getStringExtra(SipServiceContants.Extras.PASSWORD));
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_domain_key, intent.getStringExtra(SipServiceContants.Extras.DOMAIN));
-
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_pcma_key, true);
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_cancellation_key, true);
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_echo_canceller_calibration_key, true);
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_enable_key, true);
-            PreferencesUtilities.savePreference(SipService.this, R.string.pref_transport_udp_key, true);
+            PreferencesUtilities.savePreference(SipService.this, R.string.pref_transport_udp_key, false);
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_audio_use_specific_mode_key, "0");
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_video_codec_mpeg4_key, true);
             PreferencesUtilities.savePreference(SipService.this, R.string.pref_codec_amr_key, true);

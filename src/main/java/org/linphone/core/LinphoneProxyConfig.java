@@ -19,8 +19,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 package org.linphone.core;
 /**
  * The LinphoneProxyConfig object represents a proxy configuration to be used by the LinphoneCore object. Its fields must not be used directly in favour of the accessors methods. 
- * Once created and filled properly the LinphoneProxyConfig can be given to LinphoneCore with {@link org.linphone.core.LinphoneCore#addProxyConfig(org.linphone.core.LinphoneProxyConfig)}. This will automatically triggers the registration, if enabled.
- *<br>The proxy configuration are persistent to restarts because they are saved in the configuration file. As a consequence, after {@link org.linphone.core.LinphoneCoreFactory#createLinphoneCore(org.linphone.core.LinphoneCoreListener, String, String, Object)} there might already be a default proxy that can be examined with {@link org.linphone.core.LinphoneCore#getDefaultProxyConfig()} .
+ * Once created and filled properly the LinphoneProxyConfig can be given to LinphoneCore with {@link LinphoneCore#addProxyConfig(LinphoneProxyConfig)}. This will automatically triggers the registration, if enabled.
+ *<br>The proxy configuration are persistent to restarts because they are saved in the configuration file. As a consequence, after {@link LinphoneCoreFactory#createLinphoneCore(LinphoneCoreListener, String, String, Object)} there might already be a default proxy that can be examined with {@link LinphoneCore#getDefaultProxyConfig()} .
  *
  */
 public interface LinphoneProxyConfig {
@@ -86,7 +86,7 @@ public interface LinphoneProxyConfig {
 	public void setDialPrefix(String prefix);
 	/**
 	 * * Sets whether liblinphone should replace "+" by "00" in dialed numbers (passed to
-	 * {@link org.linphone.core.LinphoneCore#invite(String)}).
+	 * {@link LinphoneCore#invite(String)}).
 	 * @param value default value is false
 	 */
 	public void setDialEscapePlus(boolean value);
@@ -102,7 +102,7 @@ public interface LinphoneProxyConfig {
 	 */
 	public boolean isRegistered();
 	/**
-	 * Sets a SIP route. When a route is set, all outgoing calls will go to the route's destination if this proxy is the default one (see {@link org.linphone.core.LinphoneCore#getDefaultProxyConfig()} ).
+	 * Sets a SIP route. When a route is set, all outgoing calls will go to the route's destination if this proxy is the default one (see {@link LinphoneCore#getDefaultProxyConfig()} ).
 	 * @param routeUri ex sip:git.linphone.org
 	 * @throws LinphoneCoreException
 	 */

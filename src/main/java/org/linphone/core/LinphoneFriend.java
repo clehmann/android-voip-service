@@ -31,7 +31,7 @@ import java.util.Vector;
 public interface LinphoneFriend {
 	/**
 	 * Enum controlling behavior for incoming subscription request. 
-	 *	Use by {@link org.linphone.core.LinphoneFriend#setIncSubscribePolicy()}
+	 *	Use by {@link LinphoneFriend#setIncSubscribePolicy()}
 	 *
 	 */
 	static class SubscribePolicy {
@@ -42,7 +42,7 @@ public interface LinphoneFriend {
 		private final String mStringValue;
 		/**
 		 * Does not automatically accept an incoming subscription request. 
-		 * This policy implies that a decision has to be taken for each incoming subscription request notified by {@link org.linphone.core.LinphoneCoreListener#newSubscriptionRequest(org.linphone.core.LinphoneCore, org.linphone.core.LinphoneFriend, String)}
+		 * This policy implies that a decision has to be taken for each incoming subscription request notified by {@link LinphoneCoreListener#newSubscriptionRequest(LinphoneCore, LinphoneFriend, String)}
 		 */
 		public final static SubscribePolicy SPWait = new SubscribePolicy(0,"SPWait");
 		/**
@@ -73,7 +73,7 @@ public interface LinphoneFriend {
 		}
 	}
 	/**
-	 * Set a {@link org.linphone.core.LinphoneAddress } for this friend
+	 * Set a {@link LinphoneAddress } for this friend
 	 * @param anAddress
 	 */
 	void setAddress(LinphoneAddress anAddress);
