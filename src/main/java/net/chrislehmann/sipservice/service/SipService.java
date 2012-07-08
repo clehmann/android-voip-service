@@ -28,19 +28,6 @@ public class SipService extends RoboService implements LinphoneManager.LinphoneS
     private final static String LOGTAG = SipService.class.getSimpleName();
     private LinphoneManager linphoneManager;
 
-    /**
-     * A signal handler in native code has been triggered. As our last gasp,
-     * launch the crash handler (in its own process), because when we return
-     * from this function the process will soon exit.
-     */
-    void nativeCrashed() {
-        try {
-            System.err.println("saved game was:\n" + prefs.getString("savedGame", ""));
-        } catch (Exception e) {
-        }
-        new RuntimeException("crashed here (native trace should follow after the Java trace)").printStackTrace();
-        startActivity(new Intent(this, CrashHandler.class));
-    }
 
     class LooperThread extends Thread {
         public Handler mHandler;
